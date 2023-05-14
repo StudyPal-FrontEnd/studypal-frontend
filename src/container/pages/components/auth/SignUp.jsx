@@ -31,7 +31,7 @@ const Signup = () => {
                     </form>
 
                 </div>
-                <span className="help"><a href="landingpage"><FontAwesomeIcon icon={faInfo} /> I need help?</a></span>
+                {/* <span className="help"><a href="landingpage"><FontAwesomeIcon icon={faInfo} /> I need help?</a></span> */}
             </div>
         </div>
     )
