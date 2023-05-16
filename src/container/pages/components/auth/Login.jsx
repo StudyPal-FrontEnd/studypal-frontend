@@ -48,7 +48,7 @@ const Login = () => {
                             type="password"
                             onChange={(e) => handlePasswordChange(e)}
                             name="password" id="password" placeholder='Password'
-                        />
+                        /> <br />
                         <button className="paging-btn" onClick={() => navigate('/dashboard')}>Login</button>
                         <p>Having issue with your password?</p>
                     </form>

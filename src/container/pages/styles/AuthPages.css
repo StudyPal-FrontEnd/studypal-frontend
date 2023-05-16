@@ -61,7 +61,7 @@ a {
 }
 
 input {
-  width: 50%;
+  width: 30%;
   height: 15%;
   border-radius: 10px;
   margin-bottom: 2%;
@@ -75,11 +75,12 @@ input {
   font-size: 18px;
   border: none;
   border-radius: 8px;
-  width: 50%;
+  width: 30%;
   height: 15%;
   border-radius: 10px;
   margin-bottom: 2%;
   cursor: pointer;
+  padding: 0% 2%;
 }
 
 .paging-btn:hover {
