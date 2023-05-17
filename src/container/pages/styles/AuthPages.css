@@ -1,6 +1,7 @@
 .container {
+  width: 100%;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 35% 65%;
   height: inherit;
 }
 
@@ -15,11 +16,8 @@
 .right-section {
   height: auto;
   width: 100%;
-  margin-top: 3%;
+  margin-top: 5%;
   text-align: center;
-}
-a {
-  text-decoration: none;
 }
 
 .top-section {
@@ -27,25 +25,21 @@ a {
   justify-content: space-between;
 }
 
-/* .top-section :first-child {
-  margin-left: 10px;
-} */
-
 .top-section :nth-child(2) {
   margin-right: 5%;
 }
 
-.info-section {
-  margin-top: 5%;
+.login-section {
+  margin-top: 10%;
   width: 100%;
 }
 
-.info-section :first-child {
+.login-section :first-child {
   font-weight: 900;
   font-size: 25px;
 }
 
-.info-section :nth-child(2) {
+.login-section :nth-child(2) {
   font-weight: 400;
   font-size: 15px;
 }
@@ -61,7 +55,7 @@ a {
 }
 
 input {
-  width: 30%;
+  width: 35%;
   height: 15%;
   border-radius: 10px;
   margin-bottom: 2%;
@@ -75,8 +69,8 @@ input {
   font-size: 18px;
   border: none;
   border-radius: 8px;
-  width: 30%;
-  height: 15%;
+  width: 40%;
+  height: 16%;
   border-radius: 10px;
   margin-bottom: 2%;
   cursor: pointer;
@@ -87,13 +81,21 @@ input {
   background-color: #403b6a;
 }
 
-span {
-  margin-top: 40%;
+.help {
   margin-left: 80%;
 }
 
-@media screen and (max-width: 768px) {
-  .left-section {
-    display: none;
-  }
+.signup-section {
+  margin-top: 5%;
+  width: 100%;
+}
+
+.signup-section :first-child {
+  font-weight: 900;
+  font-size: 25px;
+}
+
+.signup-section :nth-child(2) {
+  font-weight: 400;
+  font-size: 15px;
 }
