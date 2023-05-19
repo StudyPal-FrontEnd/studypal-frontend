@@ -1,0 +1,49 @@
+.container {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  height: inherit;
+}
+
+.navBars {
+  margin-bottom: 20px;
+}
+.aside {
+  background-color: #0f0c29;
+  width: 100%;
+  height: auto;
+  margin-left: 0;
+}
+
+.brand {
+  margin: 10% 10%;
+}
+
+.nav li {
+  list-style: none;
+  margin: 20px 50px 0;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.nav a {
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+hr {
+  margin-bottom: 20%;
+}
+
+.footer {
+  margin-top: 40%;
+}
+
+.homePageBar {
+  width: 100%;
+  height: 10%;
+  border: 2px solid #0f0c29;
+  border-left: 0px;
+}

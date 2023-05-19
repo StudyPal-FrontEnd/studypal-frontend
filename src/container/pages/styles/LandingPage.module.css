@@ -6,16 +6,16 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-header {
+.header {
   display: flex;
   justify-content: space-between;
 }
 
-.nav-brand {
+.navBrand {
   margin: 50px;
 }
 
-li {
+.nav li {
   list-style: none;
   display: inline-block;
   margin: 60px 60px 0;
@@ -24,7 +24,7 @@ li {
   color: #fff;
 }
 
-nav a {
+.nav a {
   cursor: pointer;
   text-decoration: none;
   font-size: 16px;
@@ -32,12 +32,12 @@ nav a {
   color: #fff;
 }
 
-main {
+.main {
   display: grid;
   grid-template-columns: 30% 70%;
 }
 
-article h3 {
+.article h3 {
   width: 100%;
   font-size: 16px;
   font-weight: 500;
@@ -48,7 +48,7 @@ article h3 {
   font-size: 18px;
 }
 
-.banner-btn {
+.pageButton {
   width: 30%;
   height: 10%;
   border-radius: 10px;
@@ -58,11 +58,11 @@ article h3 {
   margin-left: 30%;
 }
 
-aside {
+.aside {
   margin-left: 30%;
 }
 
-aside img {
+.aside img {
   width: 500px;
   height: 350px;
 }
