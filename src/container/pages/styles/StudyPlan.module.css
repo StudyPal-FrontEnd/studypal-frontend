@@ -1,0 +1,15 @@
+/* CSS for Create Study Plan */
+
+.studyPlanSection {
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+.formPage {
+  width: 100%;
+  border: 1px solid #0f0c29;
+}
+
+.viewSchedules {
+  width: 100%;
+}
