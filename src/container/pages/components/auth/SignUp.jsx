@@ -50,12 +50,12 @@ const Signup = () => {
                             placeholder='First Name:' /> <br />
                         <input type="text"
                             value={lastName}
-                            onChange={(e) => handleLastNameChange}
+                            onChange={(e) => handleLastNameChange(e)}
                             name="lastName" id="lastName"
                             placeholder='Last Name:' /> <br />
                         <input type="email"
                             value={email}
-                            onChange={(e) => handleEmailChange}
+                            onChange={(e) => handleEmailChange(e)}
                             name="email"
                             id="email"
                             placeholder='Email:' /> <br />

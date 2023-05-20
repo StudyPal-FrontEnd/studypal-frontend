@@ -58,6 +58,10 @@
   margin-left: 30%;
 }
 
+.pageButton:hover {
+  background-color: #59599b;
+}
+
 .aside {
   margin-left: 30%;
 }
