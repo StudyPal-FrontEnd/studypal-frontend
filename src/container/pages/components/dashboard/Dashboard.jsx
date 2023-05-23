@@ -59,17 +59,17 @@ const Dashboard = () => {
                             <Link to="/notes"><button className={styles.moreButton}>more</button></Link>
                         </div>
                         <div className={styles.createSection}>
-                            <Link to="/createstudyplan"><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>
+                            <Link to=""><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>
                         </div>
 
                     </div>
                     <div className={styles.section}>
                         <div className={styles.titleBar}>
                             <h3>Resource Materials</h3>
-                            <Link to="/resourcematerials"><button className={styles.moreButton}>more</button></Link>
+                            <Link to="resourcematerials"><button className={styles.moreButton}>more</button></Link>
                         </div>
                         <div className={styles.createSection}>
-                            <Link to="/createstudyplan"><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>
+                            <Link to=""><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>
                         </div>
 
                     </div>
