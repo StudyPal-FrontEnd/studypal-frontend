@@ -46,7 +46,7 @@ const Dashboard = () => {
                     <div className={styles.section}>
                         <div className={styles.titleBar}>
                             <h3>Study Plans</h3>
-                            <button className={styles.moreButton}>more</button>
+                            <Link to="/studyplans"><button className={styles.moreButton}>more</button></Link>
                         </div>
                         <div className={styles.createSection}>
                             <Link to="/createstudyplan"><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>
@@ -56,7 +56,7 @@ const Dashboard = () => {
                     <div className={styles.section}>
                         <div className={styles.titleBar}>
                             <h3>Notes</h3>
-                            <button className={styles.moreButton}>more</button>
+                            <Link to="/notes"><button className={styles.moreButton}>more</button></Link>
                         </div>
                         <div className={styles.createSection}>
                             <Link to="/createstudyplan"><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>
@@ -66,7 +66,7 @@ const Dashboard = () => {
                     <div className={styles.section}>
                         <div className={styles.titleBar}>
                             <h3>Resource Materials</h3>
-                            <button className={styles.moreButton}>more</button>
+                            <Link to="/resourcematerials"><button className={styles.moreButton}>more</button></Link>
                         </div>
                         <div className={styles.createSection}>
                             <Link to="/createstudyplan"><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>

@@ -26,7 +26,7 @@ const SideSection = () => {
                     <hr />
                     <ul className={styles.footerContainer}>
                         <li className={styles.userProfile}><Link>Account</Link></li>
-                        <li className={styles.logout}><Link>Logout</Link></li>
+                        <li className={styles.logout}><Link to="/">Logout</Link></li>
                     </ul>
                     
                 </div>

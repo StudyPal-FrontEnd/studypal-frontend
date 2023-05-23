@@ -35,7 +35,7 @@ const ScheduleForm = () => {
     return(
         <div className={styles.studyPlanForm}>
             <form className={styles.formsection}>
-                <div className={styles.addScheduleForm}>
+            <div className={styles.addScheduleForm}>
                     <h3>Add Schedule: </h3>
                     <input type="text"
                         value={purpose}

@@ -1,15 +1,133 @@
 /* CSS for Create Study Plan */
 
-.studyPlanSection {
+/* Study Plan Form */
+.studyPlanForm {
+  width: 100%;
+  height: auto;
+  margin: 5% 4% 4% 0%;
+  text-align: center;
+}
+
+.formSecton {
+  width: 100%;
+  height: auto;
+}
+
+.formSection input,
+.formSection textarea {
+  border: 2px solid #0f0c29;
+  background-color: #d9d9d9;
+}
+
+.titleForm {
+  width: 80%;
+  margin-bottom: 20px;
+  padding: 1%;
+}
+
+textarea {
+  width: 80%;
+  padding: 1%;
+}
+
+.startSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.formDateTime {
+  width: 100%;
+  display: flex;
+  margin: 0px 0px 10px 57px;
+}
+
+label {
+  margin-right: 10px;
+  line-height: 35px;
+}
+
+.startSection input {
+  width: 50%;
+  height: 30px;
+  padding: 1%;
+}
+
+.createPlanSection {
   display: grid;
-  grid-template-columns: 80% 20%;
+  grid-template-columns: 65% 35%;
+  height: auto;
 }
 
-.formPage {
-  width: 100%;
-  border: 1px solid #0f0c29;
+.createPlanSection h3 {
+  font-weight: 900;
+  color: #0f0c29;
+  font-size: 25px;
+  padding: 2%;
+  text-align: center;
 }
 
-.viewSchedules {
+/* Create Study Plan Section */
+.createPlan {
   width: 100%;
+  height: auto;
+}
+
+.studyBar {
+  height: 50px;
+  border-bottom: 1px solid #0f0c29;
+  background-color: #d9d9d9;
+}
+
+/* .studyBar h3 */
+
+/* Schedules Section */
+.addScheduleForm h4 {
+  color: #0f0c29;
+  font-size: 19px;
+  float: left;
+  margin: 20px 0px 10px 60px;
+}
+.scheduleSection {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  border-left: 1px solid #0f0c29;
+}
+.scheduleBar {
+  height: 50px;
+  border-bottom: 1px solid #0f0c29;
+  background-color: #d9d9d9;
+}
+
+/* Button Section */
+
+.addSchedule {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #0f0c29;
+  font-size: 20px;
+}
+
+.formButtons button {
+  width: 60px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #0f0c29;
+  color: #fff;
+  font-weight: 600;
+  margin: 30px 130px;
+}
+
+.formButtons button:hover {
+  background-color: #59599b;
+}
+
+/* Schedules Added */
+.scheduleItem {
+  width: 90%;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #0f0c29;
+  background-color: #0f0c29;
+  color: #fff;
 }
