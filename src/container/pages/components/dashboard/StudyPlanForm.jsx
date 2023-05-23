@@ -1,6 +1,5 @@
 import {useState} from "react";
-import styles from '../../styles/Dashboard.module.css';
-import style from '../../styles/StudyPlan.module.css';
+import styles from '../../styles/StudyPlanForm.module.css';
 import ScheduleForm from "./ScheduleForm";
 
 
@@ -44,7 +43,7 @@ const StudyPlanForm = () => {
           
             
 
-            </div>
+        </div>
     )
 }
 

@@ -1,0 +1,23 @@
+.pageTitle {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+
+.pageTitle h4 {
+  margin-left: 20px;
+  font-size: 24px;
+}
+
+.pageTitle button {
+  margin-right: 20px;
+}
+
+.addStudyPlan {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #0f0c29;
+  font-size: 20px;
+}
