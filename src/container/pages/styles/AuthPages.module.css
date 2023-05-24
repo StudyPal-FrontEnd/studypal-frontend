@@ -1,10 +1,11 @@
 .container {
+  width: 100%;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 35% 65%;
   height: inherit;
 }
 
-.left-section {
+.leftSection {
   background-image: url("../../../assets/images/svg/authImg.svg");
   background-repeat: no-repeat;
   background-size: contain;
@@ -12,87 +13,89 @@
   width: 100%;
 }
 
-.right-section {
+.rightSection {
   height: auto;
   width: 100%;
-  margin-top: 3%;
+  margin-top: 5%;
   text-align: center;
 }
-a {
-  text-decoration: none;
-}
 
-.top-section {
+.topSection {
   display: flex;
   justify-content: space-between;
 }
 
-/* .top-section :first-child {
-  margin-left: 10px;
-} */
-
-.top-section :nth-child(2) {
+.topSection :nth-child(2) {
   margin-right: 5%;
 }
 
-.info-section {
-  margin-top: 5%;
+.loginSection {
+  margin-top: 10%;
   width: 100%;
 }
 
-.info-section :first-child {
+.loginSection :first-child {
   font-weight: 900;
   font-size: 25px;
 }
 
-.info-section :nth-child(2) {
+.loginSection :nth-child(2) {
   font-weight: 400;
   font-size: 15px;
 }
 
-.form-section {
+.formSection {
   margin-top: 5%;
   height: 50%;
 }
 
-.form-input {
+.formInput {
   width: 100%;
   height: 100%;
 }
 
-input {
-  width: 50%;
+.formSection input {
+  width: 35%;
   height: 15%;
   border-radius: 10px;
   margin-bottom: 2%;
   padding: 0% 2%;
 }
 
-.paging-btn {
+.pageButton {
   display: inline-block;
   background-color: #24243e;
   color: #ffffff;
   font-size: 18px;
   border: none;
   border-radius: 8px;
-  width: 50%;
-  height: 15%;
+  width: 40%;
+  height: 16%;
   border-radius: 10px;
   margin-bottom: 2%;
   cursor: pointer;
+  padding: 0% 2%;
 }
 
-.paging-btn:hover {
+.pageButton:hover {
   background-color: #403b6a;
 }
 
-span {
-  margin-top: 40%;
+.help {
   margin-left: 80%;
 }
 
-@media screen and (max-width: 768px) {
-  .left-section {
-    display: none;
-  }
+.signupSection {
+  margin-top: 5%;
+  width: 100%;
+}
+
+.signupSection :first-child {
+  font-weight: 900;
+  font-size: 25px;
+}
+
+.signupSection :nth-child(2) {
+  font-weight: 400;
+  font-size: 15px;
 }

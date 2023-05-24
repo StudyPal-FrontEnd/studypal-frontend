@@ -1,6 +1,6 @@
 import { useState } from "react";
-import '../../styles/AuthPages.css';
-import { useNavigate } from "react-router-dom";
+import styles from '../../styles/AuthPages.module.css';
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLessThan, faInfo } from '@fortawesome/free-solid-svg-icons'
 
@@ -24,36 +24,35 @@ const Login = () => {
 
 
     return (
-        <div className="container">
-            <div className="left-section">
-            </div>
-            <div className="right-section">
-                <div className="top-section">
-                    <p><a href="landingpage"> <FontAwesomeIcon icon={faLessThan} />  Return Home</a></p>
-                    <p>Not a member yet? <a href="signup"><strong>JOIN NOW</strong></a></p>
+        <div className={styles.container}>
+            <div className={styles.leftSection}></div>
+            <div className={styles.rightSection}>
+                <div className={styles.topSection}>
+                    <p><Link to="/"> <FontAwesomeIcon icon={faLessThan} />  Return Home</Link></p>
+                    <p>Not a member yet? <Link to="/signup"><strong>JOIN NOW</strong></Link></p>
                 </div>
-                <div className="info-section">
+                <div className={styles.loginSection}>
                     <p>Welcome Back!</p>
                     <p>Login to your dashboard</p>
                 </div>
-                <div className="form-section">
-                    <form className="form-input">
+                <div className={styles.formSection}>
+                    <form className={styles.formInput}>
                         <input value={email}
                             type="email"
                             onChange={(e) => handleEmailChange(e)}
-                            name="email" id="email" placeholder='Email'
+                            name="email" id="email" placeholder='Email:'
                         />
                         <br />
                          <input value={password}
                             type="password"
                             onChange={(e) => handlePasswordChange(e)}
-                            name="password" id="password" placeholder='Password'
-                        />
-                        <button className="paging-btn" onClick={() => navigate('/dashboard')}>Login</button>
-                        <p>Having issue with your password?</p>
+                            name="password" id="password" placeholder='Password:'
+                        /> <br />
+                        <button className={styles.pageButton} onClick={() => navigate('/dashboard')}>Login</button>
+                        <p><Link to="/forgot-password"><FontAwesomeIcon icon={faInfo} />Forgot Password?</Link></p>
                     </form>
                 </div>
-                <span className="help"><a href="landingpage"><FontAwesomeIcon icon={faInfo} /> I need help?</a></span>
+                <span className={styles.help}><a href="landingpage"><FontAwesomeIcon icon={faInfo} />need help?</a></span>
                 
             </div>
         </div>

@@ -1,0 +1,165 @@
+/* The Dashboard Container */
+.container {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  height: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+/* The Aside Section */
+
+.aside {
+  background-color: #0f0c29;
+  width: 100%;
+  height: auto;
+  margin-left: 0;
+}
+
+.navBars {
+  margin-bottom: 20px;
+}
+
+.brand {
+  margin: 20% 10%;
+}
+
+.nav li {
+  margin: 20px 50px 0;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+li:hover {
+  background-color: #59599b;
+}
+
+.container a {
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+hr {
+  margin-bottom: 20%;
+}
+
+.footer {
+  margin-top: 70%;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+/* The Home Page Content */
+.homePage {
+  width: 100%;
+  height: 100%;
+}
+
+.homePageBar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 15%;
+  border-bottom: 1px solid #0f0c29;
+  background-color: #d9d9d9;
+}
+
+.searchBar {
+  width: 40%;
+  margin: 30px;
+}
+
+.searchBar input {
+  width: 60%;
+  height: 30px;
+}
+
+.searchButton {
+  width: 60px;
+  margin-left: 20px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #0f0c29;
+  color: #fff;
+  font-weight: 600;
+}
+
+.searchButton:hover {
+  background-color: #59599b;
+}
+
+.profile {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 30px 0;
+}
+
+.imgBorder {
+  width: 71px;
+  height: 71px;
+  border: 1px solid black;
+  border-radius: 100%;
+  background-color: #0f0c29;
+}
+
+.profileName {
+  margin: 20px;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+/* Home Articles */
+
+.homeSection {
+  width: 100%;
+  height: auto;
+}
+
+.section {
+  width: 100%;
+}
+
+.titleBar {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+}
+
+.moreButton {
+  width: 50px;
+  height: 20px;
+  background-color: #0f0c29;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.moreButton:hover {
+  background-color: #59599b;
+}
+
+.createSection {
+  margin: 0 30px;
+}
+
+.addButton {
+  width: 150px;
+  height: 100px;
+  background-color: #0f0c29;
+  font-size: 60px;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.addButton:hover {
+  background-color: #59599b;
+}
