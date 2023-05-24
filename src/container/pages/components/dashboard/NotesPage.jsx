@@ -1,7 +1,11 @@
 import {useState} from "react";
 import styles from '../../styles/Dashboard.module.css';
+import style from '../../styles/ViewAllPages.module.css';
 import ProfileImg from "../../../../assets/images/svg/profileImg.svg";
 import SideSection from "./SideSection";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 
 
 
@@ -38,6 +42,12 @@ const NotesPage = () => {
                         
                         <div className={styles.profileName}>Martins Jonathan</div>
                     </div>
+                </div>
+                <div className={style.createdPlans}>
+                <div className={style.pageTitle}>
+                    <h4>Notes</h4>
+                    <Link to="/createstudyplan"><button className={style.addStudyPlan}><FontAwesomeIcon icon={faPlus} /></button></Link>
+                </div>
                 </div>
             </div>
         </div>

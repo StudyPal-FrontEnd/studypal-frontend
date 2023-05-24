@@ -11,6 +11,7 @@ import ResourceMaterials from './container/pages/components/dashboard/ResourceMa
 import CreateStudyPlan from './container/pages/components/dashboard/CreateStudyPlan';
 import CreateNote from './container/pages/components/dashboard/CreateNote';
 import SearchResources from './container/pages/components/dashboard/SearchResources';
+import OtpPage from './container/pages/components/auth/OtpPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/otp-page' element={<OtpPage />} />
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='studyplans' element={<StudyPlansPage />} />
           <Route path='notes' element={<NotesPage />} />
