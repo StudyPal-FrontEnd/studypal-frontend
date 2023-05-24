@@ -1,0 +1,131 @@
+.page1 {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    height: inherit;
+  }
+
+  .top{
+    display: flex;
+    top: 50%;
+    margin-right: 60%;
+  }
+  
+  .rightside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 3%;
+    text-align: center;
+  }
+  
+  .page1Image {
+    width: 100%;
+    height: auto;
+  }
+
+
+.otp-input{
+    border-width: 1px;
+    height: 40px;
+    width: 40px;
+    padding-left: 10px;
+    border-radius: 6px;
+}
+
+.otp-div{
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+}
+  
+  .log {
+    margin-bottom: 7vh;
+  }
+
+  .info{
+    font-size: 27px;
+  }
+    
+  .signup {
+    text-decoration: underline;
+  }
+  
+    
+  @media only screen and (max-width: 500px) {
+    .leftside {
+      display: none;
+    }
+  }
+  
+  .modalcontainer{
+    position: fixed;
+    z-index: 1;
+    padding-top: 10em;
+    left:  0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  
+  
+  .content{
+    margin: auto;
+    width: 27em;    
+    height: 9em;
+    background-color: #fff;
+    border-radius: .5cm;
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  .modal{
+    padding: 1cm;
+    font-size: 400;
+    font-weight: 500;
+  }
+  
+  .modal2{
+    padding: 4cm;
+    font-size: 200;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+  
+  .modalspan{
+    margin-left: 5em;
+  }
+  
+  .span{
+    margin-left: 15em;
+  }
+  
+  .acctmodal{
+    padding: 1cm;
+    font-size: 300;
+    font-weight: 500;
+    inline-size: auto;
+    bottom: 50px;
+  }
+  
+  .button{
+    display: inline-block;
+    background-color: #24243e;
+    color: #ffff;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    height: 45px;
+    width: 50%;
+    cursor: pointer;
+    margin-top: 2%;
+  }
+
+.button:hover{
+  background-color: #403b6a;
+}
+  
