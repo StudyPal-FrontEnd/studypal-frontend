@@ -1,69 +1,129 @@
 import { useState } from "react";
-import "../../styles/AuthPages.css";
-import "../../styles/otp.css";
-import image from "../../../../assets/images/svg/authImg.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLessThan } from "@fortawesome/free-solid-svg-icons";
+import styles from '../../styles/AuthPages.module.css';
+import style from '../../styles/otp.module.css';
+import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLessThan} from '@fortawesome/free-solid-svg-icons'
+import axios from "axios";
 
-function OTP() {
-  const [show, setShow] = useState(false);
-  return (
-    <div>
-      <div className="page1">
-        <div className="leftside">
-          <img src={image} alt="" className="page1Image" />
+
+const OTP = () => {
+    const navigate = useNavigate();
+    const [otp1, setOtp1] = useState("");
+    const [otp2, setOtp2] = useState("");
+    const [otp3, setOtp3] = useState("");
+    const [otp4, setOtp4] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+  
+    const handleOtpChange = (e, inputNum) => {
+      const value = e.target.value;
+      switch (inputNum) {
+        case 1:
+          setOtp1(value);
+          break;
+        case 2:
+          setOtp2(value);
+          break;
+        case 3:
+          setOtp3(value);
+          break;
+        case 4:
+          setOtp4(value);
+          break;
+        default:
+          break;
+      }
+    };
+  
+    const handleOtpSubmit = (e) => {
+      e.preventDefault();
+  
+      const otp = otp1 + otp2 + otp3 + otp4;
+  
+      const data = {
+        otp: otp,
+      };
+  
+      axios
+        .post("http://localhost:8080/api/v1/studypal/verify", data)
+        .then((response) => {
+          console.log(response.data);
+          navigate("/dashboard");
+        })
+        .catch((error) => {
+          console.log(error.message);
+          setModalMessage("Incorrect or expired OTP. Please try again.");
+          setShowModal(true);
+        });
+    };
+  
+    const closeModal = () => {
+      setShowModal(false);
+    };
+  
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.leftSection}></div>
+            <div className={styles.rightSection}>
+                <div className={styles.topSection}>
+                    <p><Link to="/"> <FontAwesomeIcon icon={faLessThan} />  Return Home</Link></p>
+                </div>
+                
+            <div className={style.tokenContainer}>
+                  <div className={style.tokenHeader}>
+                      <p> Kindly Check your mail to see your OTP number for Account verification</p>
+                      <h4>Enter you OTP Number</h4>
+                  </div>
+                  <div className={style.tokenSection}>
+                      <form className={style.tokenForm} onSubmit={handleOtpSubmit}>
+                          <input 
+                                type="password" value={otp1}
+                                name="password" id="password"
+                                maxlength="1" placeholder=''
+                                onChange={(e) => handleOtpChange(e, 1)}
+                            />
+                        
+                            <input 
+                                type="password" value={otp2}
+                                name="password" id="password"
+                                maxlength="1" placeholder=''
+                                onChange={(e) => handleOtpChange(e, 2)}
+                            />
+                            <input 
+                                type="password" value={otp3}
+                                name="password" id="password"
+                                maxlength="1" placeholder=''
+                                onChange={(e) => handleOtpChange(e, 3)}
+                            />
+                            <input 
+                                type="password" value={otp4}
+                                name="password" id="password"
+                                maxlength="1" placeholder=''
+                                onChange={(e) => handleOtpChange(e, 4)}
+                            />
+                          <br />
+                
+                          
+                          <button className={style.pageButton} onClick={() => navigate('/dashboard')}>Continue</button>
+                        
+                      </form>
+                  </div> 
+            </div>
+                
+            </div>
+            
+            {showModal && (
+                <div className={style.modal}>
+                    <div className={style.modalContent}>
+                        <p>{modalMessage}</p>
+                        <button className={style.modalButton} onClick= {closeModal}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
-        <div className="rightside">
-          <div className="top">
-            <p>
-              <a href="landingpage">
-                {" "}
-                <FontAwesomeIcon icon={faLessThan} /> Return Home
-              </a>
-            </p>
-          </div>
-          <div className="text1">
-            <p className="text">
-              Kindly Check your mail to see your OTP number for Account
-              verification
-            </p>
-          </div>
-          <div className="text2">
-            <p className="log">Enter your OTP Number</p>
-          </div>
-          <div className="otp-div">
-            <input type="text" className="otp-input" />
-            <input type="text" className="otp-input" />
-            <input type="text" className="otp-input" />
-            <input type="text" className="otp-input" />
-          </div>
-          <button
-            type="button"
-            className="button"
-            onClick={() => {
-              setShow(!show);
-            }}
-          >
-            Continue
-          </button>
-        </div>
-      </div>
-      <div
-        className="modalcontainer"
-        style={{ display: show ? "block" : "none" }}
-      >
-        <div className="content">
-          <p className="acctmodal">
-            Your OTP is invalid or expired
-            <span className="span">
-              <a href="" className="signup">
-                back
-              </a>
-            </span>
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
+    )
+} 
+
 export default OTP;

@@ -1,0 +1,130 @@
+.tokenContainer {
+  width: 100%;
+  margin-top: 100px;
+}
+
+.tokenHeader {
+  width: 100%;
+  /* height: auto; */
+}
+
+.tokenHeader p {
+  width: 45%;
+  margin: 50px auto;
+  color: #424242;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.tokenHeader h4 {
+  color: #0f0c29;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.tokenSection {
+  width: 100%;
+}
+
+.tokenForm {
+  width: 100%;
+}
+
+.tokenForm input {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  color: #1c1464;
+  font-size: 40px;
+  margin: 0 15px 25px;
+  border: 2px solid #0f0c29;
+  border-radius: 10px;
+}
+
+.pageButton {
+  display: inline-block;
+  background-color: #24243e;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  width: 40%;
+  height: 26%;
+  border-radius: 10px;
+  margin-bottom: 2%;
+  cursor: pointer;
+  padding: 1% 2%;
+}
+
+.pageButton:hover {
+  background-color: #403b6a;
+}
+
+.modalcontainer {
+  position: fixed;
+  z-index: 1;
+  padding-top: 10em;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.content {
+  margin: auto;
+  width: 27em;
+  height: 9em;
+  background-color: #fff;
+  border-radius: 0.5cm;
+  display: flex;
+  align-items: center;
+}
+
+.modal {
+  padding: 1cm;
+  font-size: 400;
+  font-weight: 500;
+}
+
+.modal2 {
+  padding: 4cm;
+  font-size: 200;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.modalspan {
+  margin-left: 5em;
+}
+
+.span {
+  margin-left: 15em;
+}
+
+.acctmodal {
+  padding: 1cm;
+  font-size: 300;
+  font-weight: 500;
+  inline-size: auto;
+  bottom: 50px;
+}
+
+.button {
+  display: inline-block;
+  background-color: #24243e;
+  color: #ffff;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  height: 45px;
+  width: 50%;
+  cursor: pointer;
+  margin-top: 2%;
+}
+
+.button:hover {
+  background-color: #403b6a;
+}
