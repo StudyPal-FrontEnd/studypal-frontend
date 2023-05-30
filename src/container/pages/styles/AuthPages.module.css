@@ -66,6 +66,7 @@
   display: inline-block;
   background-color: #24243e;
   color: #ffffff;
+  font-weight: 700;
   font-size: 18px;
   border: none;
   border-radius: 8px;
@@ -98,4 +99,11 @@
 .signupSection :nth-child(2) {
   font-weight: 400;
   font-size: 15px;
+}
+
+/* Validation  */
+.error {
+  font-size: 10px;
+  color: red;
+  padding: 0;
 }

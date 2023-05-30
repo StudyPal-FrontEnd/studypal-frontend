@@ -3,7 +3,6 @@ import LandingPage from './container/pages/components/auth/LandingPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './container/pages/components/auth/Login';
 import Signup from './container/pages/components/auth/SignUp';
-
 import OTP from './container/pages/components/auth/OtpInput';
 import Dashboard from './container/pages/components/dashboard/Dashboard';
 import DashboardTemplate from './container/pages/components/dashboard/Template';
@@ -13,7 +12,7 @@ import ResourceMaterials from './container/pages/components/dashboard/ResourceMa
 import CreateStudyPlan from './container/pages/components/dashboard/CreateStudyPlan';
 import CreateNote from './container/pages/components/dashboard/CreateNote';
 import SearchResources from './container/pages/components/dashboard/SearchResources';
-import OtpPage from './container/pages/components/auth/OtpPage';
+
 
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/otp-page' element={<OtpPage />} />
+          <Route path='/otp-page' element={<OTP />} />
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='studyplans' element={<StudyPlansPage />} />
           <Route path='notes' element={<NotesPage />} />

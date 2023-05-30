@@ -7,19 +7,68 @@ import { faLessThan, faInfo } from '@fortawesome/free-solid-svg-icons'
 
 
 const Login = () => {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [currentField, setCurrentField] = useState("");
+    const [errors, setErrors] = useState({});
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordRegex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
+
+
+
+
     const navigate = useNavigate();
 
     const handleEmailChange = (e) => {
-        e.preventDefault();
-        setEmail(e.target.value)
+        setEmail(e.target.value);
+        setCurrentField("email");
     }
 
     const handlePasswordChange = (e) => {
-        e.preventDefault();
         setPassword(e.target.value)
+        setCurrentField("password");
     }
+
+
+    const isValidEmail = (email) => {
+        return emailRegex.test(email);
+    };
+
+    const isValidPassword = (password) => {
+        return passwordRegex.test(password);
+    };
+    
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        const validationErrors = {};
+
+        if (email.trim() === "") {
+            validationErrors.email = "Please enter your email address.";
+            setCurrentField("email");
+        } else if (!isValidEmail(email)) {
+            validationErrors.email = "Please enter a valid email address.";
+            setCurrentField("email");
+        } else if (password.length < 6) {
+            validationErrors.password = "Password must be at least 6 characters long.";
+            setCurrentField("password");
+        } else if (!isValidPassword(password)) { 
+            validationErrors.password = "Password must contain at least one uppercase letter, one lowercase letter, and one digit";
+            setCurrentField("password");
+        }
+
+        setErrors(validationErrors);
+
+        if (Object.keys(validationErrors).length === 0) {
+            navigate("/dashboard");
+        }
+
+        setTimeout(() => {
+            setErrors({});
+            setCurrentField("")
+        }, 3000);
+    };
+
 
 
 
@@ -36,19 +85,26 @@ const Login = () => {
                     <p>Login to your dashboard</p>
                 </div>
                 <div className={styles.formSection}>
-                    <form className={styles.formInput}>
+                    <form className={styles.formInput} onSubmit={handleFormSubmit}>
                         <input value={email}
                             type="email"
                             onChange={(e) => handleEmailChange(e)}
                             name="email" id="email" placeholder='Email:'
                         />
+                        {errors.email && currentField === "email" && (
+                            <p className={styles.error}>{ errors.email}</p>
+                        )}
                         <br />
                          <input value={password}
                             type="password"
                             onChange={(e) => handlePasswordChange(e)}
                             name="password" id="password" placeholder='Password:'
-                        /> <br />
-                        <button className={styles.pageButton} onClick={() => navigate('/dashboard')}>Login</button>
+                        />
+                         {errors.password && currentField === "password" && (
+                            <p className={styles.error}>{ errors.password}</p>
+                        )}
+                        <br />
+                        <button className={styles.pageButton}>Login</button>
                         <p><Link to="/forgot-password"><FontAwesomeIcon icon={faInfo} />Forgot Password?</Link></p>
                     </form>
                 </div>
