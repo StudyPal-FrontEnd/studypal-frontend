@@ -64,11 +64,11 @@ const Signup = () => {
         password: password,
       };
       axios
-        .post("http://localhost:8080/api/v1/studypal/registerUser", data)
+        .post("http://localhost:9000/api/v1/studypal/register", data)
         .then(response => {
-          console.log(response.data);
+          console.log(response.data);  
           setUserData(response.data);
-          navigate("/otp-page");
+          navigate("/otp-page", {state: {email: email}});
         })
         .catch(error => {
           console.log(error.message);

@@ -2,7 +2,9 @@ import { useState } from "react";
 import styles from '../../styles/AuthPages.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLessThan, faInfo } from '@fortawesome/free-solid-svg-icons'
+import { faLessThan, faInfo} from '@fortawesome/free-solid-svg-icons'
+import axios from "axios";
+
 
 
 
@@ -11,6 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [currentField, setCurrentField] = useState("");
     const [errors, setErrors] = useState({});
+    // const [showPassword, setShowPassword] = useState(false);
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
 
@@ -28,6 +31,10 @@ const Login = () => {
         setPassword(e.target.value)
         setCurrentField("password");
     }
+
+    // const togglePasswordVisibility = () => { 
+    //     setShowPassword(!showPassword)
+    // }
 
 
     const isValidEmail = (email) => {
@@ -58,9 +65,37 @@ const Login = () => {
         }
 
         setErrors(validationErrors);
+       
 
         if (Object.keys(validationErrors).length === 0) {
-            navigate("/dashboard");
+            const data = {
+                email:  email,
+                password: password,
+            }
+            const success = true;
+            axios.post("http://localhost:9000/api/v1/studypal/login", data)
+                .then(response => {
+                     const { success, message } = response.data;
+                     if (success) {
+                       navigate("/dashboard");
+                     } else {
+                       setErrors({ login: message });
+                     }
+                   })
+                   .catch(error => {
+                     console.log(error);
+                   });
+
+          
+            setTimeout(() => {
+                if (success) {
+                    navigate("/dashboard");
+
+                } else {
+                    setErrors({ login: "Invalid email or password" })
+                }
+            }, 1000);
+            
         }
 
         setTimeout(() => {
@@ -95,12 +130,27 @@ const Login = () => {
                             <p className={styles.error}>{ errors.email}</p>
                         )}
                         <br />
-                         <input value={password}
-                            type="password"
-                            onChange={(e) => handlePasswordChange(e)}
-                            name="password" id="password" placeholder='Password:'
-                        />
-                         {errors.password && currentField === "password" && (
+                        <input
+                                value={password}
+                                type="password"
+                                onChange={(e) => handlePasswordChange(e)}
+                                name="password" id="password" placeholder='Password:'
+                            />
+                        {/* <div className={styles.passwordContainer}>
+                        <input
+                                value={password}
+                                type="password"
+                                onChange={(e) => handlePasswordChange(e)}
+                                name="password" id="password" placeholder='Password:'
+                            />
+                          
+                            <FontAwesomeIcon
+                                icon={showPassword ? faEyeSlash : faEye}
+                                className={styles.passwordIcon}
+                                onClick={togglePasswordVisibility}
+                            />
+                        </div> */}
+                        {errors.password && currentField === "password" && (
                             <p className={styles.error}>{ errors.password}</p>
                         )}
                         <br />

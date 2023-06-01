@@ -7,15 +7,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
-const CreateStudyPlan = () => {
+
+const CreateStudyPlan = ({ addStudyPlan }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [purpose, setPurpose] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [startTime, setStartTime] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [endTime, setEndTime] = useState('');
+    const [startDateTime, setStartDateTime] = useState('');    
+    const [endDateTime, setEndDateTime] = useState('');
     const [schedules, setSchedules] = useState([]);
+    
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -25,38 +25,69 @@ const CreateStudyPlan = () => {
         setDescription(e.target.value);
     }
 
+    // const handleScheduleInputChange = (index, field, value) => {
+    //     const updatedInputs = [...scheduleInputs];
+    //     updatedInputs[index][field] = value;
+    //     setScheduleInputs(updatedInputs);
+    // }
+
+    // const handleAddSchedule = () => {
+    //     setScheduleInputs([...setScheduleInputs, {}]);
+    // }
+
 
     const handlePurposeChange = (e) => {
         setPurpose(e.target.value);
     }
 
-    const handleStartDateChange = (e) => {
-        setStartDate(e.target.value);
+    const handleStartDateTimeChange = (e) => {
+        setStartDateTime(e.target.value);
     }
 
-    const handleStartTimeChange = (e) => {
-        setStartTime(e.target.value);
+
+    const handleEndDateTimeChange = (e) => {
+        setEndDateTime(e.target.value);
     }
 
-    const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
-    }
 
-    const handleEndTimeChange = (e) => {
-        setEndTime(e.target.value);
-    }
+   
 
 
     const handleAddschedule = (e) => {
         e.preventDefault();
         const newSchedule = {
             purpose: purpose,
-            startDate: startDate,
-            startTime: startTime,
-            endDate: endDate,
-            endTime: endTime,
+            startDateTime: startDateTime,
+            endDateTime: endDateTime,
         };
         setSchedules([...schedules, newSchedule]);
+        
+        setPurpose('');
+        setStartDateTime('');
+        setEndDateTime('');
+    }
+
+    const handleAddStudyPlan = (e) => {
+        
+        e.preventDefault();
+        const newSchedules = schedules.map((input) => ({
+            purpose: purpose,
+            startDate: startDateTime,
+            endDateTime: endDateTime,
+        }))
+
+        const newStudyPlan = {
+            title: title,
+            description: description,
+            schedules: newSchedules,
+        };
+        addStudyPlan(newStudyPlan);
+      
+
+        setTitle('');
+        setDescription('');
+        setSchedules([]);
+        console.log(newStudyPlan);
     }
 
  
@@ -69,7 +100,7 @@ const CreateStudyPlan = () => {
                         <h3>Create Study Plan</h3>
                     </div>
                     <div className={style.studyPlanForm}>
-                    <form className={style.formSection}>
+                    <form className={style.formSection} onSubmit={handleAddStudyPlan}>
                         <input className={style.titleForm} type="text"
                             value={title}
                             onChange={(e) => handleTitleChange(e)}
@@ -84,7 +115,8 @@ const CreateStudyPlan = () => {
                             placeholder="Description:">
                         </textarea> <br />
                         <div className={style.addScheduleForm}>
-                            <h4>Add Schedule: </h4>
+                                <h4>Add Schedule: </h4>
+                                
                             <input className={style.titleForm} type="text"
                                 value={purpose}
                                 onChange={(e) => handlePurposeChange(e)}
@@ -92,60 +124,38 @@ const CreateStudyPlan = () => {
                                 placeholder="Purpose:"
                             /> 
 
-                            <div className={style.startSection}>
+                            <div className={style.dateTimeSection}>
                                 <div className={style.formDateTime}>
                                     <div>
-                                        <label htmlFor="startDate">Start Date:</label>
+                                        <label htmlFor="startDateTime">Start Date And Start Time:</label>
                                     </div>
-                                    <input type="Date"
-                                        value={startDate}
-                                        onChange={(e) => handleStartDateChange(e)}
-                                        name="startDate" id="startDate"
+                                    <input type="datetime-local"
+                                        value={startDateTime}
+                                        onChange={(e) => handleStartDateTimeChange(e)}
+                                        name="startDateTime" id="startDateTime"
                                     /> 
-                                </div>
-                                <div className={style.formDateTime}>
-                                    <div>
-                                        <label htmlFor="startTime">Start Time:</label>
-                                    </div>
-                                    <input type="time"
-                                        value={startTime}
-                                        onChange={(e) => handleStartTimeChange(e)}
-                                        name="startTime" id="startTime"     
-                                    />
-                                </div>        
-                                    
+                                </div>    
                             </div>  
 
-                            <div className={style.startSection}>
+                            <div className={style.dateTimeSection}>
                                 <div className={style.formDateTime}>
                                     <div>
-                                        <label htmlFor="endDate">End Date:</label>
+                                        <label htmlFor="endDate">End Date And End Time:</label>
                                     </div>
-                                    <input type="Date"
-                                        value={endDate}
-                                        onChange={(e) => handleEndDateChange(e)}
-                                        name="endDate" id="endDate"
+                                    <input type="datetime-local"
+                                        value={endDateTime}
+                                        onChange={(e) => handleEndDateTimeChange(e)}
+                                        name="endDateTime" id="endDateTime"
                                     /> 
-                                </div>
-                                <div className={style.formDateTime}>
-                                    <div>
-                                        <label htmlFor="endTime">End Time:</label>
-                                    </div>
-                                    <input type="time"
-                                        value={endTime}
-                                        onChange={(e) => handleEndTimeChange(e)}
-                                        name="endTime" id="endTime"     
-                                    />
-                                </div>        
-                                    
+                                </div>       
                              </div>
                             
                             <button className={style.addSchedule} onClick={handleAddschedule}><FontAwesomeIcon icon={faPlus} /></button>
-                            </div>
-                            <div className={style.formButtons}>
-                               <Link to="/dashboard"> <button>Cancel</button></Link>
-                                <button>Save</button>
-                            </div>
+                        </div>
+                        <div className={style.formButtons}>
+                            <Link to="/dashboard"> <button>Cancel</button></Link>
+                            <button>Save</button>
+                        </div>
                     </form>
     
                 </div>
@@ -157,10 +167,8 @@ const CreateStudyPlan = () => {
                     {schedules.map((schedule, index) => (
                         <div key={index} className={style.scheduleItem}>
                             <h4>Purpose: {schedule.purpose}</h4>
-                            <p>Start Date: {schedule.startDate}</p>
-                            <p>Start Time: {schedule.startTime}</p>
-                            <p>End Date: {schedule.endDate}</p>
-                            <p>End Time: { schedule.endTime}</p>
+                            <p>Start Date And Time: {schedule.startDateTime}</p>
+                            <p>End Date And Time: {schedule.endDateTime}</p>        
                         </div>
                     ))}
                    

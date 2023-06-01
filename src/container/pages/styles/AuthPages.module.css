@@ -107,3 +107,35 @@
   color: red;
   padding: 0;
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    display: block;
+  }
+  .leftSection {
+    display: none;
+  }
+
+  .rightSection {
+    width: 100%;
+    margin: 10% auto;
+  }
+
+  .topSection {
+    width: 100%;
+  }
+
+  .topSection :first-child {
+  }
+
+  .topSection :nth-child(2) {
+    margin-right: 0%;
+    font-size: 16px;
+  }
+
+  .loginSection {
+    margin-top: 10%;
+    width: 100%;
+  }
+}

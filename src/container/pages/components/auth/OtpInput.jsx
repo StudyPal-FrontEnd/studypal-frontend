@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useState} from "react";
 import styles from '../../styles/AuthPages.module.css';
 import style from '../../styles/otp.module.css';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLessThan} from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
 
 
 const OTP = () => {
-    const navigate = useNavigate();
-    const [otp1, setOtp1] = useState("");
-    const [otp2, setOtp2] = useState("");
-    const [otp3, setOtp3] = useState("");
-    const [otp4, setOtp4] = useState("");
-    const [showModal, setShowModal] = useState(false);
-    const [modalMessage, setModalMessage] = useState("");
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location?.state?.email || "";
+  const [otp1, setOtp1] = useState("");
+  const [otp2, setOtp2] = useState("");
+  const [otp3, setOtp3] = useState("");
+  const [otp4, setOtp4] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+
+
     const handleOtpChange = (e, inputNum) => {
       const value = e.target.value;
       switch (inputNum) {
@@ -31,6 +35,7 @@ const OTP = () => {
         case 4:
           setOtp4(value);
           break;
+        
         default:
           break;
       }
@@ -38,25 +43,34 @@ const OTP = () => {
   
     const handleOtpSubmit = (e) => {
       e.preventDefault();
-  
+    
       const otp = otp1 + otp2 + otp3 + otp4;
-  
-      const data = {
-        otp: otp,
-      };
-  
-      axios
-        .post("http://localhost:8080/api/v1/studypal/verify", data)
-        .then((response) => {
-          console.log(response.data);
-          navigate("/dashboard");
+    
+      
+      
+    
+      axios.post("http://localhost:9000/api/v1/studypal/verify" ,{email, otp})
+        .then(response => {
+          console.log("Email:", email);
+          setShowModal(true);
+          setModalMessage("Your email is verified.");
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 2000);
+          
         })
         .catch((error) => {
           console.log(error.message);
           setModalMessage("Incorrect or expired OTP. Please try again.");
           setShowModal(true);
         });
+      
+      setOtp1('');
+      setOtp2('');
+      setOtp3('');
+      setOtp4('');
     };
+    
   
     const closeModal = () => {
       setShowModal(false);
@@ -81,32 +95,34 @@ const OTP = () => {
                           <input 
                                 type="password" value={otp1}
                                 name="password" id="password"
-                                maxlength="1" placeholder=''
+                                maxLength="1" placeholder=''
                                 onChange={(e) => handleOtpChange(e, 1)}
                             />
                         
                             <input 
                                 type="password" value={otp2}
                                 name="password" id="password"
-                                maxlength="1" placeholder=''
+                                maxLength="1" placeholder=''
                                 onChange={(e) => handleOtpChange(e, 2)}
                             />
                             <input 
                                 type="password" value={otp3}
                                 name="password" id="password"
-                                maxlength="1" placeholder=''
+                                maxLength="1" placeholder=''
                                 onChange={(e) => handleOtpChange(e, 3)}
                             />
                             <input 
                                 type="password" value={otp4}
                                 name="password" id="password"
-                                maxlength="1" placeholder=''
+                                maxLength="1" placeholder=''
                                 onChange={(e) => handleOtpChange(e, 4)}
                             />
-                          <br />
+                <br />
+                
                 
                           
-                          <button className={style.pageButton} onClick={() => navigate('/dashboard')}>Continue</button>
+                <button className={style.pageButton}>Continue</button>  <br />
+                <Link to=""> Resend email </Link>
                         
                       </form>
                   </div> 
@@ -115,7 +131,8 @@ const OTP = () => {
             </div>
             
             {showModal && (
-                <div className={style.modal}>
+          <div className={style.modal}>
+            <div onClick={closeModal} className={style.overlay}></div>
                     <div className={style.modalContent}>
                         <p>{modalMessage}</p>
                         <button className={style.modalButton} onClick= {closeModal}>Close</button>

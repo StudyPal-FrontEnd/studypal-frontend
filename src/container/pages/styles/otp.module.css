@@ -61,7 +61,39 @@
   background-color: #403b6a;
 }
 
-.modalcontainer {
+/* Modal Style */
+body.active-modal {
+  overflow: hidden;
+}
+
+.modal,
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  background: rgba(49, 49, 49, 0.8);
+}
+
+.modalContent {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: white;
+  padding: 50px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+/* .modalcontainer {
   position: fixed;
   z-index: 1;
   padding-top: 10em;
@@ -127,4 +159,4 @@
 
 .button:hover {
   background-color: #403b6a;
-}
+} */

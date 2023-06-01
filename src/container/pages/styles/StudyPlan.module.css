@@ -30,26 +30,27 @@ textarea {
   padding: 1%;
 }
 
-.startSection {
-  display: flex;
-  justify-content: space-between;
+.dateTimeSection {
+  width: 100%;
 }
 
 .formDateTime {
   width: 100%;
   display: flex;
-  margin: 0px 0px 10px 57px;
+  justify-content: space-between;
+  margin: 10px 0px 10px 55px;
 }
 
-label {
+.formDateTime label {
   margin-right: 10px;
   line-height: 35px;
 }
 
-.startSection input {
-  width: 50%;
+.dateTimeSection input {
+  width: 30%;
   height: 30px;
   padding: 1%;
+  margin-right: 120px;
 }
 
 .createPlanSection {
@@ -80,13 +81,15 @@ label {
 
 /* .studyBar h3 */
 
-/* Schedules Section */
+/*  Create Schedules Section */
 .addScheduleForm h4 {
   color: #0f0c29;
   font-size: 19px;
   float: left;
   margin: 20px 0px 10px 60px;
 }
+
+/* View Schedule Section */
 .scheduleSection {
   width: 100%;
   height: auto;
