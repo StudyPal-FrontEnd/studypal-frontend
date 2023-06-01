@@ -2,7 +2,8 @@ import React from "react";
 import styles from '../../styles/Dashboard.module.css';
 import { Link } from "react-router-dom";
 import brandImg from "../../../../assets/images/svg/brand.svg";
-
+// import brand from "../../../../assets/images/png/"
+    
 const SideSection = () => {
    
     return (
