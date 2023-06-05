@@ -12,7 +12,7 @@ const StudyPlanProvider = ({ children }) => {
 
   return (
     <StudyPlanContext.Provider value={{ studyPlans, addStudyPlan }}>
-      <Outlet />
+      {children}
     </StudyPlanContext.Provider>
   );
 };

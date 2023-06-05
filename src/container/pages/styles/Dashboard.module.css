@@ -31,10 +31,10 @@ li {
   font-size: 24px;
   font-weight: 900;
 }
-
+/* 
 li:hover {
   background-color: #59599b;
-}
+} */
 
 .container a {
   cursor: pointer;
@@ -136,7 +136,7 @@ hr {
 .titleBar {
   display: flex;
   justify-content: space-between;
-  margin: 30px;
+  margin: 30px 35px 30px 30px;
 }
 
 .moreButton {
@@ -152,13 +152,38 @@ hr {
   background-color: #59599b;
 }
 
+/* Created StudyPlan */
 .createSection {
+  width: 95%;
   margin: 0 30px;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  /* display: flex; */
+  /* background-color: #403b6a;
+  border: 2px solid red; */
+}
+
+/* All Study Plans Styles */
+.allStudyPlans {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.studyPlan {
+  position: relative;
+  background-color: #0f0c29;
+  color: #fff;
+  text-align: center;
+  width: 195px;
+  height: 120px;
+  font-size: 13px;
+  border-radius: 10px;
 }
 
 .addButton {
-  width: 150px;
-  height: 100px;
+  width: 195px;
+  height: 120px;
   background-color: #0f0c29;
   font-size: 60px;
   color: #fff;
@@ -167,4 +192,16 @@ hr {
 
 .addButton:hover {
   background-color: #59599b;
+}
+
+/* Delete Button */
+.deleteIcon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #fff;
+  background-color: red;
+  border-radius: 100%;
+  cursor: pointer;
 }

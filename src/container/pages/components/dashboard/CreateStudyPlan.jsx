@@ -40,12 +40,11 @@ const CreateStudyPlan = () => {
   const handleAddschedule = (e) => {
     e.preventDefault();
     const newSchedule = {
-      purpose: { purpose },
+      purpose: purpose,
       startDateTime: startDateTime,
       endDateTime: endDateTime,
     };
     setSchedules([...schedules, newSchedule]);
-
     setPurpose("");
     setStartDateTime("");
     setEndDateTime("");

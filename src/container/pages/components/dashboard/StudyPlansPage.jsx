@@ -10,12 +10,13 @@ import StudyPlanContext from "../../Contexts/StudyPlanContext";
 
 const StudyPlansPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  // const { title, description, purpose } = useContext(StudyPlanContext);
   const { studyPlans } = useContext(StudyPlanContext);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  const recentStudyPlans = studyPlans.slice(0, studyPlans.length).reverse();
 
   return (
     <div className={styles.container}>
@@ -57,8 +58,8 @@ const StudyPlansPage = () => {
             </Link>
           </div>
           <div className={style.allStudyPlans}>
-            {studyPlans.map((studyPlan, index) => (
-              <div className={style.plans} key={index}>
+            {recentStudyPlans.map((studyPlan, index) => (
+              <div className={style.studyplan} key={index}>
                 <h4>Title: {studyPlan.title}</h4>
                 <p>Description: {studyPlan.description}</p>
                 <ul>
