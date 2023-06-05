@@ -8,9 +8,9 @@ import SideSection from "./SideSection";
 
 
 
-const Dashboard = () => {
+const Dashboard = ({ fullName }) => {
     const [searchTerm, setSearchTerm] = useState("");
-
+   
     const handleSearch = (e) => {
        
         setSearchTerm(e.target.value);
@@ -38,18 +38,17 @@ const Dashboard = () => {
                         <div className={styles.imgBorder}>
                         <img className={styles.profileImg} src={ProfileImg} alt="Profile Ima"/>
                         </div>
-                        
-                        <div className={styles.profileName}>Martins Jonathan</div>
+                        <div className={styles.profileName}>{ fullName }</div>
                     </div>
                 </div>
                 <div className={styles.homeSection}>
                     <div className={styles.section}>
                         <div className={styles.titleBar}>
                             <h3>Study Plans</h3>
-                            <Link to="/studyplans"><button className={styles.moreButton}>more</button></Link>
+                            <Link to="/studyplan"><button className={styles.moreButton}>more</button></Link>
                         </div>
                         <div className={styles.createSection}>
-                            <Link to="/createstudyplan"><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>
+                            <Link to="/studyplan/create"><button className={styles.addButton}><FontAwesomeIcon icon={faPlus} /></button></Link>
                         </div>
 
                     </div>

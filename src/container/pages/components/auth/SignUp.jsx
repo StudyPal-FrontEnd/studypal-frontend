@@ -16,7 +16,7 @@ const Signup = () => {
     const [errors, setErrors] = useState({});
     const nameRegex = /^[A-Z][a-zA-Z]*$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   
   const [userData, setUserData] = useState([])
 
@@ -66,9 +66,10 @@ const Signup = () => {
       axios
         .post("http://localhost:9000/api/v1/studypal/register", data)
         .then(response => {
-          console.log(response.data);  
+          console.log(response.data);    
           setUserData(response.data);
-          navigate("/otp-page", {state: {email: email}});
+          const  fullName = `${firstName} ${lastName}`
+          navigate("/otp-page", {state: {email: email, fullName: fullName}});
         })
         .catch(error => {
           console.log(error.message);

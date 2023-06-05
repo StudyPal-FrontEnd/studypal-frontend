@@ -44,12 +44,12 @@ const OTP = () => {
     const handleOtpSubmit = (e) => {
       e.preventDefault();
     
-      const otp = otp1 + otp2 + otp3 + otp4;
+      const verificationToken = otp1 + otp2 + otp3 + otp4;
     
       
       
     
-      axios.post("http://localhost:9000/api/v1/studypal/verify" ,{email, otp})
+      axios.post("http://localhost:9000/api/v1/studypal/verify" ,{email, verificationToken})
         .then(response => {
           console.log("Email:", email);
           setShowModal(true);
