@@ -1,9 +1,16 @@
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState, useEffect } from "react";
 import styles from "../../styles/Dashboard.module.css";
 import { Link } from "react-router-dom";
 import ProfileImg from "../../../../assets/images/svg/profileImg.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAsterisk, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faCalendarCheck,
+  faNoteSticky,
+  faStickyNote,
+} from "@fortawesome/free-solid-svg-icons";
+import { Icon } from "@iconify/react";
+
 import SideSection from "./SideSection";
 import StudyPlanContext from "../../Contexts/StudyPlanContext";
 
@@ -11,8 +18,6 @@ const Dashboard = ({ fullName }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const { studyPlans } = useContext(StudyPlanContext);
   const [recentStudyPlans, setRecentStudyPlans] = useState([]);
-  const [deleteIndex, setDeleteIndex] = useState(null);
-  const studyPlanRefs = useRef([]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -25,20 +30,12 @@ const Dashboard = ({ fullName }) => {
 
   const mostRecentStudyPlans = recentStudyPlans.slice(0, 4);
 
-  const confirmDelete = (index) => {
-    if (window.confirm("Are you sure you want to delete this study plan?")) {
-      const updatedStudyPlans = [...recentStudyPlans];
-      updatedStudyPlans.slice(index, 1);
-      setRecentStudyPlans(updatedStudyPlans);
-    }
-  };
-
   return (
     <div className={styles.container}>
       <SideSection />
 
       <div className={styles.homePage}>
-        <div cla ssName={styles.homePageBar}>
+        <div className={styles.homePageBar}>
           <div className={styles.searchBar}>
             <input
               type="text"
@@ -66,42 +63,39 @@ const Dashboard = ({ fullName }) => {
           <div className={styles.section}>
             <div className={styles.titleBar}>
               <h3>Study Plans</h3>
-              <Link to="/studyplan">
-                <button className={styles.moreButton}>more</button>
-              </Link>
+              {studyPlans.length > 0 && (
+                <Link to="/studyplan">
+                  <button className={styles.moreButton}>more</button>
+                </Link>
+              )}
             </div>
             <div className={styles.createSection}>
               <Link to="/studyplan/create">
                 <button className={styles.addButton}>
-                  <FontAwesomeIcon icon={faPlus} />
+                  <Icon
+                    icon="mdi:file-plus"
+                    color="white"
+                    className={styles.customIcon}
+                  />
                 </button>
               </Link>
               <div className={styles.allStudyPlans}>
                 {mostRecentStudyPlans.map((studyPlan, index) => (
-                  <div
-                    className={styles.studyPlan}
-                    key={index}
-                    ref={(ref) => (studyPlanRefs.current[index] = ref)}
-                    onMouseEnter={() => setDeleteIndex(index)}
-                    onMouseLeave={() => setDeleteIndex(null)}
-                    onClick={() => confirmDelete(index)}
-                  >
-                    <h4>Title: {studyPlan.title}</h4>
-                    <p>Description: {studyPlan.description}</p>
-                    <ul>
-                      {studyPlan.schedules.map((schedule, index) => (
-                        <li key={index}>
-                          <h5>Purpose: {schedule.purpose}</h5>
-                          <p>Start Date And Time: {schedule.startDateTime}</p>
-                          <p>End Date And Time: {schedule.endDateTime}</p>
-                        </li>
-                      ))}
-                    </ul>
-                    {deleteIndex === index && (
-                      <div className={styles.deleteIcon}>
-                        <FontAwesomeIcon icon={faAsterisk} />
-                      </div>
-                    )}
+                  <div className={styles.studyPlan} key={index}>
+                    <div className={styles.studyContent}>
+                      <h4>Title: {studyPlan.title}</h4>
+                      <p className={styles.lineClamp}>
+                        Description: {studyPlan.description}
+                      </p>
+                    </div>
+
+                    <p className={styles.schedules}>
+                      You have <strong>{studyPlan.schedules.length} </strong>
+                      {studyPlan.schedules.length === 1
+                        ? "Schedule"
+                        : "Schedules"}{" "}
+                      for this Study plan
+                    </p>
                   </div>
                 ))}
               </div>
@@ -112,13 +106,17 @@ const Dashboard = ({ fullName }) => {
             <div className={styles.titleBar}>
               <h3>Notes</h3>
               <Link to="/notes">
-                <button className={styles.moreButton}>more</button>
+                {/* <button className={styles.moreButton}>more</button> */}
               </Link>
             </div>
             <div className={styles.createSection}>
-              <Link to="">
+              <Link to="/createnotes">
                 <button className={styles.addButton}>
-                  <FontAwesomeIcon icon={faPlus} />
+                  <Icon
+                    icon="emojione-v1:spiral-notepad"
+                    color="white"
+                    className={styles.customIcon}
+                  />
                 </button>
               </Link>
             </div>
@@ -127,13 +125,17 @@ const Dashboard = ({ fullName }) => {
             <div className={styles.titleBar}>
               <h3>Resource Materials</h3>
               <Link to="resourcematerials">
-                <button className={styles.moreButton}>more</button>
+                {/* <button className={styles.moreButton}>more</button> */}
               </Link>
             </div>
             <div className={styles.createSection}>
               <Link to="">
                 <button className={styles.addButton}>
-                  <FontAwesomeIcon icon={faPlus} />
+                  <Icon
+                    icon="mdi:semantic-web"
+                    color="white"
+                    className={styles.customIcon}
+                  />
                 </button>
               </Link>
             </div>

@@ -1,27 +1,32 @@
-import { useContext, useState, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "../../styles/Dashboard.module.css";
 import style from "../../styles/StudyPlan.module.css";
 import SideSection from "./SideSection";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faAsterisk } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import StudyPlanContext from "../../Contexts/StudyPlanContext";
-import axios from "axios";
 
-const CreateStudyPlan = () => {
-  const { addStudyPlan } = useContext(StudyPlanContext);
+const UpdateStudyPlan = () => {
+  const { index } = useParams();
+  const history = useNavigate();
+  const { studyPlans, updateStudyPlan } = useContext(StudyPlanContext);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [purpose, setPurpose] = useState("");
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
   const [schedules, setSchedules] = useState([]);
-  const [createError, setCreateError] = useState(false);
-  const [scheduleError, setScheduleError] = useState(false);
 
-  const [deleteIndices, setDeleteIndices] = useState([]);
-  const navigate = useNavigate();
-  const scheduleRefs = useRef([]);
+  useEffect(() => {
+    if (studyPlans[index]) {
+      const { title, description, schedules } = studyPlans[index];
+      setTitle(title);
+      setDescription(description);
+      setSchedules(schedules);
+    }
+  }, [studyPlans, index]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -45,32 +50,18 @@ const CreateStudyPlan = () => {
 
   const handleAddschedule = (e) => {
     e.preventDefault();
-
-    if (!purpose.trim() || !startDateTime.trim() || !endDateTime.trim()) {
-      setScheduleError(true);
-
-      setTimeout(() => {
-        setScheduleError(false);
-      }, 3000);
-
-      return;
-    }
-
-    if (purpose.trim() && startDateTime.trim() && endDateTime.trim()) {
-      const newSchedule = {
-        purpose: purpose,
-        startDateTime: startDateTime,
-        endDateTime: endDateTime,
-      };
-      setSchedules([...schedules, newSchedule]);
-    }
-
+    const newSchedule = {
+      purpose: purpose,
+      startDateTime: startDateTime,
+      endDateTime: endDateTime,
+    };
+    setSchedules([...schedules, newSchedule]);
     setPurpose("");
     setStartDateTime("");
     setEndDateTime("");
   };
 
-  const confirmDelete = (index) => {
+  const deleteSchedule = (index) => {
     if (window.confirm("Are you sure you want to delete this schedule?")) {
       const newSchedule = [...schedules];
       newSchedule.splice(index, 1);
@@ -78,88 +69,77 @@ const CreateStudyPlan = () => {
     }
   };
 
-  // const handleAddStudyPlan = async (e) => {
-  //   e.preventDefault();
-  //   const newSchedules = schedules.map((schedule) => ({
-  //     purpose: schedule.purpose,
-  //     startDate: schedule.startDateTime,
-  //     endDateTime: schedule.endDateTime,
-  //   }));
-
-  //   const newStudyPlan = {
-  //     title,
-  //     description,
-  //     schedules: newSchedules,
+  //   const handleRemoveSchedule = (scheduleIndex) => {
+  //     const updatedSchedules = [...schedules];
+  //     updatedSchedules.splice(scheduleIndex, 1);
+  //     setSchedules(updatedSchedules);
   //   };
 
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:9000/api/v1/studypal/studyplan/create",
-  //       newStudyPlan
-  //     );
-  //     console.log(response.data);
-
-  //     addStudyPlan(newStudyPlan);
-  //     navigate("/studyplan");
-
-  //     setTitle("");
-  //     setDescription("");
-  //     setSchedules([]);
-  //     console.log(newStudyPlan);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  const handleAddStudyPlan = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (title.trim() === "" || description.trim() === "") {
-      setCreateError(true);
-
-      setTimeout(() => {
-        setCreateError(false);
-      }, 3000);
-
-      return;
-    }
-
-    const newSchedules = schedules.map((schedule) => ({
-      purpose: schedule.purpose,
-      startDate: schedule.startDateTime,
-      endDateTime: schedule.endDateTime,
-    }));
-
-    const newStudyPlan = {
+    const updatedStudyPlan = {
       title,
       description,
-      schedules: newSchedules,
+      schedules,
     };
 
-    addStudyPlan(newStudyPlan);
-
-    setTitle("");
-    setDescription("");
-    setSchedules([]);
-    console.log(newStudyPlan);
-    navigate("/studyplan");
+    updateStudyPlan(index, updatedStudyPlan);
+    history.push("/studyplan"); // Redirect to the study plans page after updating
   };
 
   return (
+    // <div>
+    //   <h1>Update Study Plan</h1>
+    //   <form onSubmit={handleSubmit}>
+    //     <div>
+    //       <label htmlFor="title">Title:</label>
+    //       <input
+    //         type="text"
+    //         id="title"
+    //         value={title}
+    //         onChange={handleTitleChange}
+    //       />
+    //     </div>
+    //     <div>
+    //       <label htmlFor="description">Description:</label>
+    //       <textarea
+    //         id="description"
+    //         value={description}
+    //         onChange={handleDescriptionChange}
+    //       />
+    //     </div>
+    //     <div>
+    //       <h4>Schedules:</h4>
+    //       {schedules.map((schedule, index) => (
+    //         <div key={index}>
+    //           <input
+    //             type="text"
+    //             value={schedule}
+    //             onChange={(e) => handleScheduleChange(e, index)}
+    //           />
+    //           <button type="button" onClick={() => handleRemoveSchedule(index)}>
+    //             Remove
+    //           </button>
+    //         </div>
+    //       ))}
+    //       <button type="button" onClick={handleAddSchedule}>
+    //         Add Schedule
+    //       </button>
+    //     </div>
+    //     <button type="submit">Update</button>
+    //   </form>
+    // </div>
+
     <div className={styles.container}>
       <SideSection />
       <div className={style.createPlanSection}>
         <div className={style.createPlan}>
           <div className={style.studyBar}>
-            <h3>Create Study Plan</h3>
+            <h1>Update Study Plan</h1>
           </div>
           <div className={style.studyPlanForm}>
-            <form className={style.formSection} onSubmit={handleAddStudyPlan}>
-              {createError && (
-                <p className={styles.error}>
-                  Please fill in the title and description fields.
-                </p>
-              )}
+            <form className={style.formSection} onSubmit={handleSubmit}>
               <input
                 className={style.titleForm}
                 type="text"
@@ -183,12 +163,6 @@ const CreateStudyPlan = () => {
               <br />
               <div className={style.addScheduleForm}>
                 <h4>Add Schedule: </h4>
-                {scheduleError && (
-                  <p className={styles.error}>
-                    You cannot add empty schedule please add at least one
-                    schedule.
-                  </p>
-                )}
 
                 <input
                   className={style.titleForm}
@@ -244,7 +218,7 @@ const CreateStudyPlan = () => {
                   {" "}
                   <button>Cancel</button>
                 </Link>
-                <button type="submit">Save</button>
+                <button type="submit">Update</button>
               </div>
             </form>
           </div>
@@ -254,22 +228,10 @@ const CreateStudyPlan = () => {
             <h3>Schedules</h3>
           </div>
           {schedules.map((schedule, index) => (
-            <div
-              key={index}
-              className={style.scheduleItem}
-              ref={(ref) => (scheduleRefs.current[index] = ref)}
-              onMouseEnter={() => setDeleteIndices(index)}
-              onMouseLeave={() => setDeleteIndices(null)}
-              onClick={() => confirmDelete(index)}
-            >
+            <div key={index} className={style.scheduleItem}>
               <h5>Purpose: {schedule.purpose}</h5>
               <p>Start Date And Time: {schedule.startDateTime}</p>
               <p>End Date And Time: {schedule.endDateTime}</p>
-              {deleteIndices === index && (
-                <div className={style.deleteIcon}>
-                  <FontAwesomeIcon icon={faAsterisk} />
-                </div>
-              )}
             </div>
           ))}
         </div>
@@ -278,4 +240,4 @@ const CreateStudyPlan = () => {
   );
 };
 
-export default CreateStudyPlan;
+export default UpdateStudyPlan;

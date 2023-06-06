@@ -14,16 +14,24 @@ const SideSection = () => {
         <div className={styles.nav}>
           <ul>
             <li>
-              <Link to="/dashboard">Home</Link>
+              <Link className={styles.link} to="/dashboard">
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/studyplan">Study Plan</Link>
+              <Link className={styles.link} to="/studyplan">
+                Study Plan
+              </Link>
             </li>
             <li>
-              <Link to="/notes">Note</Link>
+              <Link className={styles.link} to="/notes">
+                Note
+              </Link>
             </li>
             <li>
-              <Link to="/resourcematerials">Resource Materials</Link>
+              <Link className={styles.link} to="/resourcematerials">
+                Resource Materials
+              </Link>
             </li>
           </ul>
         </div>
@@ -33,10 +41,12 @@ const SideSection = () => {
         <hr />
         <ul className={styles.footerContainer}>
           <li className={styles.userProfile}>
-            <Link>Account</Link>
+            <Link className={styles.link}>Account</Link>
           </li>
           <li className={styles.logout}>
-            <Link to="/">Logout</Link>
+            <Link className={styles.link} to="/">
+              Logout
+            </Link>
           </li>
         </ul>
       </div>
