@@ -1,26 +1,22 @@
-import { useState } from "react";
-import styles from '../../styles/Dashboard.module.css';
-import style from '../../styles/ViewAllPages.module.css';
+import React, { useState, useContext } from "react";
+import styles from "../../styles/Dashboard.module.css";
+import style from "../../styles/ViewAllPages.module.css";
 import ProfileImg from "../../../../assets/images/svg/profileImg.svg";
 import SideSection from "./SideSection";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import CreateStudyPlan from "./CreateStudyPlan";
-// import CreateStudyPlan from "./CreateStudyPlan";
+import StudyPlanContext from "../../Contexts/StudyPlanContext";
 
 const StudyPlansPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [studyPlans, setStudyPlans] = useState([]);
-
-  const addStudyPlan = (studyPlan) => {
-    setStudyPlans((prevStudyPlans) => [...prevStudyPlans, studyPlan]);
-  };
-  
+  const { studyPlans } = useContext(StudyPlanContext);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  const recentStudyPlans = studyPlans.slice(0, studyPlans.length).reverse();
 
   return (
     <div className={styles.container}>
@@ -42,7 +38,11 @@ const StudyPlansPage = () => {
 
           <div className={styles.profile}>
             <div className={styles.imgBorder}>
-              <img className={styles.profileImg} src={ProfileImg} alt="Profile Ima" />
+              <img
+                className={styles.profileImg}
+                src={ProfileImg}
+                alt="Profile Ima"
+              />
             </div>
 
             <div className={styles.profileName}>Martins Jonathan</div>
@@ -51,30 +51,35 @@ const StudyPlansPage = () => {
         <div className={style.createdPlans}>
           <div className={style.pageTitle}>
             <h4>Study Plans</h4>
-            <Link to="/createstudyplan">
+            <Link to="/studyplan/create">
               <button className={style.addStudyPlan}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </Link>
           </div>
+          <div className={style.allStudyPlans}>
+            {recentStudyPlans.map((studyPlan, index) => (
+              <div className={style.studyplan} key={index}>
+                <h4>Title: {studyPlan.title}</h4>
+                <p>Description: {studyPlan.description}</p>
+                <ul>
+                  {studyPlan.schedules.map((schedule, index) => (
+                    <li key={index}>
+                      <h5>Purpose: {schedule.purpose}</h5>
+                      <p>Start Date And Time: {schedule.startDateTime}</p>
+                      <p>End Date And Time: {schedule.endDateTime}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
 
-          <CreateStudyPlan addStudyPlan={addStudyPlan} />
-          {studyPlans && (
-            <div>
-              <p>Title: {studyPlans.title}</p>
-              <p>Description: {studyPlans.description}</p>
-              {studyPlans.schedules.map((schedule, index) => (
-                <div key={index}>
-                  <h4>Purpose: {schedule.purpose}</h4>
-                  <p>Start Date: {schedule.startDate}</p>
-                  <p>Start Time: {schedule.startTime}</p>
-                  <p>End Date: {schedule.endDate}</p>
-                  <p>End Time: {schedule.endTime}</p>
-                </div>
-          ))}
-              
-            </div>
-          )}
+            {/* <div className={style.plans}>
+              <h4>Title: { title }</h4>
+              <p>Description: { description}</p>
+              <h5>Purpose: { purpose }</h5>
+            </div> */}
+          </div>
         </div>
       </div>
     </div>
