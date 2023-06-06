@@ -9,6 +9,12 @@ li {
   list-style: none;
 }
 
+.link:hover {
+  background-color: #1b426e;
+  border: 1px solid #fff;
+  padding: 10px;
+}
+
 /* The Aside Section */
 
 .aside {
@@ -31,10 +37,6 @@ li {
   font-size: 24px;
   font-weight: 900;
 }
-/* 
-li:hover {
-  background-color: #59599b;
-} */
 
 .container a {
   cursor: pointer;
@@ -62,11 +64,6 @@ hr {
 .homePage {
   width: 100%;
   height: 100%;
-  /* background-image: url("../../../assets/images/png/pageback.avif"); */
-  /* background-repeat: no-repeat; */
-  /* background-size: contain;
-  height: auto;
-  width: 100%; */
 }
 
 .homePageBar {
@@ -75,7 +72,7 @@ hr {
   width: 100%;
   height: 15%;
   border-bottom: 1px solid #0f0c29;
-  background-color: #d9d9d9;
+  background-color: #29598f;
 }
 
 .searchBar {
@@ -152,15 +149,21 @@ hr {
   background-color: #59599b;
 }
 
+/* Line Clamp style for Description */
+
+.lineClamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* Created StudyPlan */
 .createSection {
   width: 95%;
   margin: 0 30px;
   display: grid;
   grid-template-columns: 20% 80%;
-  /* display: flex; */
-  /* background-color: #403b6a;
-  border: 2px solid red; */
 }
 
 /* All Study Plans Styles */
@@ -171,37 +174,43 @@ hr {
 }
 
 .studyPlan {
-  position: relative;
-  background-color: #0f0c29;
+  background-color: #1b426e;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
   color: #fff;
   text-align: center;
   width: 195px;
   height: 120px;
   font-size: 13px;
   border-radius: 10px;
+  /* padding: 5px; */
+}
+
+.studyContent {
+  margin-top: 10px;
+}
+
+.schedules {
+  margin-top: 20px;
 }
 
 .addButton {
   width: 195px;
   height: 120px;
-  background-color: #0f0c29;
-  font-size: 60px;
+  background-color: #1b426e;
   color: #fff;
   border-radius: 10px;
+}
+
+.customIcon {
+  width: 100px;
+  height: 120px;
+  font-size: 50px;
 }
 
 .addButton:hover {
   background-color: #59599b;
 }
 
-/* Delete Button */
-.deleteIcon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  color: #fff;
-  background-color: red;
-  border-radius: 100%;
-  cursor: pointer;
+.error {
+  color: red;
 }

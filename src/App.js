@@ -11,6 +11,7 @@ import StudyPlansPage from "./container/pages/components/dashboard/StudyPlansPag
 import NotesPage from "./container/pages/components/dashboard/NotesPage";
 import ResourceMaterials from "./container/pages/components/dashboard/ResourceMaterials";
 import CreateStudyPlan from "./container/pages/components/dashboard/CreateStudyPlan";
+import UpdateStudyPlan from "./container/pages/components/dashboard/UpdateStudyPlan";
 import CreateNote from "./container/pages/components/dashboard/CreateNote";
 import SearchResources from "./container/pages/components/dashboard/SearchResources";
 import Profile from "./container/pages/components/ContextPractice/Profile";
@@ -38,6 +39,7 @@ function App() {
             <Route path="/studyplan">
               <Route path="" element={<StudyPlansPage />} />
               <Route path="create" element={<CreateStudyPlan />} />
+              <Route path="update" element={<UpdateStudyPlan />} />
             </Route>
 
             <Route path="notes" element={<NotesPage />} />

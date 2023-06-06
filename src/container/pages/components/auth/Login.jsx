@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLessThan, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLessThan, faInfo } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import styles from '../../styles/AuthPages.module.css';
+import styles from "../../styles/AuthPages.module.css";
 
 const Login = () => {
-  const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [currentField, setCurrentField] = useState("");
   const [errors, setErrors] = useState({});
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -45,7 +45,8 @@ const Login = () => {
       validationErrors.email = "Please enter a valid email address.";
       setCurrentField("email");
     } else if (password.length < 6) {
-      validationErrors.password = "Password must be at least 6 characters long.";
+      validationErrors.password =
+        "Password must be at least 6 characters long.";
       setCurrentField("password");
     } else if (!isValidPassword(password)) {
       validationErrors.password =
@@ -62,32 +63,23 @@ const Login = () => {
       };
 
       axios
-        .post(
-          "http://localhost:9000/api/v1/studypal/login",
-          data
-        )
-        .then(response => {
-          const firstName = response.data.firstName;
-          const lastName = response.data.lastName;
-          fullName = `${firstName} ${lastName}`
-          setFullName(fullName);
-          navigate("/dashboard", {state: {fullName}});
+        .post("http://localhost:9000/api/v1/studypal/login", data)
+        .then((response) => {
+          navigate("/dashboard");
         })
 
-       
-      .catch (error =>  {
-        console.log(error);
-        setErrors("Invalid email or password")
-        })
+        .catch((error) => {
+          console.log(error);
+          setErrors("Invalid email or password");
+        });
     }
-    
+
     setTimeout(() => {
-        setErrors({});
-      }, 3000);
+      setErrors({});
+    }, 3000);
 
-
-    setEmail("")
-    setPassword("")
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -101,7 +93,10 @@ const Login = () => {
             </Link>
           </p>
           <p>
-            Not a member yet? <Link to="/signup"><strong>JOIN NOW</strong></Link>
+            Not a member yet?{" "}
+            <Link to="/signup">
+              <strong>JOIN NOW</strong>
+            </Link>
           </p>
         </div>
         <div className={styles.loginSection}>
@@ -134,9 +129,7 @@ const Login = () => {
               <p className={styles.error}>{errors.password}</p>
             )}
             <br />
-            {errors.login && (
-              <p className={styles.error}>{errors.login}</p>
-            )}
+            {errors.login && <p className={styles.error}>{errors.login}</p>}
             <button className={styles.pageButton}>Login</button>
             <p>
               <Link to="/forgot-password">

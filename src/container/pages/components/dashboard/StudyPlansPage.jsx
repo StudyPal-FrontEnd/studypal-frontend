@@ -1,22 +1,32 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import styles from "../../styles/Dashboard.module.css";
 import style from "../../styles/ViewAllPages.module.css";
 import ProfileImg from "../../../../assets/images/svg/profileImg.svg";
 import SideSection from "./SideSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faAsterisk } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import StudyPlanContext from "../../Contexts/StudyPlanContext";
 
 const StudyPlansPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { studyPlans } = useContext(StudyPlanContext);
+  const { studyPlans, deleteStudyPlan } = useContext(StudyPlanContext);
+  const [deleteIndices, setDeleteIndices] = useState([]);
+  const [recentStudyPlans, setRecentStudyPlans] = useState([]);
+  const studyPlanRefs = useRef([]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const recentStudyPlans = studyPlans.slice(0, studyPlans.length).reverse();
+  useEffect(() => {
+    const sortedStudyPlans = studyPlans.slice(0, studyPlans.length).reverse();
+    setRecentStudyPlans(sortedStudyPlans);
+  }, [studyPlans]);
+
+  const confirmDelete = (index) => {
+    deleteStudyPlan(index);
+  };
 
   return (
     <div className={styles.container}>
@@ -59,26 +69,34 @@ const StudyPlansPage = () => {
           </div>
           <div className={style.allStudyPlans}>
             {recentStudyPlans.map((studyPlan, index) => (
-              <div className={style.studyplan} key={index}>
-                <h4>Title: {studyPlan.title}</h4>
-                <p>Description: {studyPlan.description}</p>
-                <ul>
-                  {studyPlan.schedules.map((schedule, index) => (
-                    <li key={index}>
-                      <h5>Purpose: {schedule.purpose}</h5>
-                      <p>Start Date And Time: {schedule.startDateTime}</p>
-                      <p>End Date And Time: {schedule.endDateTime}</p>
-                    </li>
-                  ))}
-                </ul>
+              <div key={index}>
+                <div
+                  className={style.studyplan}
+                  key={index}
+                  ref={(ref) => (studyPlanRefs.current[index] = ref)}
+                  onMouseEnter={() => setDeleteIndices(index)}
+                  onMouseLeave={() => setDeleteIndices(null)}
+                  onClick={() => confirmDelete(index)}
+                >
+                  <h4>Title: {studyPlan.title}</h4>
+                  <p className={styles.lineClamp}>
+                    Description: {studyPlan.description}
+                  </p>
+                  <p>
+                    You have <strong>{studyPlan.schedules.length} </strong>
+                    {studyPlan.schedules.length === 1
+                      ? "Schedule"
+                      : "Schedules"}{" "}
+                    for this Study plan
+                  </p>
+                  {deleteIndices === index && (
+                    <div className={style.deleteIcon}>
+                      <FontAwesomeIcon icon={faAsterisk} />
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
-
-            {/* <div className={style.plans}>
-              <h4>Title: { title }</h4>
-              <p>Description: { description}</p>
-              <h5>Purpose: { purpose }</h5>
-            </div> */}
           </div>
         </div>
       </div>

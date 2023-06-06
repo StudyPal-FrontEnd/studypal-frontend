@@ -31,9 +31,22 @@
 }
 
 .studyplan {
+  position: relative;
   background-color: #0f0c29;
   color: #fff;
   margin: 10px;
   text-align: center;
   border-radius: 10px;
+}
+
+/* Delete Button */
+.deleteIcon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 15px;
+  color: #fff;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
 }

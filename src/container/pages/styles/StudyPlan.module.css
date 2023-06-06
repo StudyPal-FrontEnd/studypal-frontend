@@ -127,10 +127,23 @@ textarea {
 
 /* Schedules Added */
 .scheduleItem {
+  position: relative;
   width: 90%;
   margin: 10px;
   padding: 10px;
   border: 2px solid #0f0c29;
   background-color: #0f0c29;
   color: #fff;
+}
+
+/* Delete Button */
+.deleteIcon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 15px;
+  color: #fff;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
 }
