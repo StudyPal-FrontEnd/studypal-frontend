@@ -24,6 +24,7 @@ const Dashboard = () => {
   }, [studyPlans]);
 
   const mostRecentStudyPlans = recentStudyPlans.slice(0, 4);
+  console.log(user);
 
   return (
     <div className={styles.container}>

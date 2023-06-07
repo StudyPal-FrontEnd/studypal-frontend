@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faAsterisk } from "@fortawesome/free-solid-svg-icons";
 import StudyPlanContext from "../../Contexts/StudyPlanContext";
 import axios from "axios";
+import UserContext from "../../Contexts/UserContext";
 
 const CreateStudyPlan = () => {
+  const { user } = useContext(UserContext);
   const { addStudyPlan } = useContext(StudyPlanContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -78,8 +80,66 @@ const CreateStudyPlan = () => {
     }
   };
 
-  // const handleAddStudyPlan = async (e) => {
+  const handleAddStudyPlan = async (e) => {
+    e.preventDefault();
+    const newSchedules = schedules.map((schedule) => ({
+      purpose: schedule.purpose,
+      startDate: schedule.startDateTime,
+      endDateTime: schedule.endDateTime,
+    }));
+
+    const newStudyPlan = {
+      title,
+      description,
+      schedules: newSchedules,
+      userId: user.id,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:9000/api/v1/studypal/studyplan/create",
+        newStudyPlan
+      );
+      console.log(response.data);
+
+      const studyPlanId = response.data.id;
+      for (const schedule of newSchedules) {
+        await axios.post(
+          "http://localhost:9000/api/v1/studypal/schedule/create",
+          {
+            studyPlanId,
+            purpose: schedule.purpose,
+            startDate: schedule.startDate,
+            endDateTime: schedule.endDateTime,
+          }
+        );
+      }
+
+      addStudyPlan(newStudyPlan);
+      navigate("/studyplan");
+
+      setTitle("");
+      setDescription("");
+      setSchedules([]);
+      console.log(newStudyPlan);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const handleAddStudyPlan = (e) => {
   //   e.preventDefault();
+
+  //   if (title.trim() === "" || description.trim() === "") {
+  //     setCreateError(true);
+
+  //     setTimeout(() => {
+  //       setCreateError(false);
+  //     }, 3000);
+
+  //     return;
+  //   }
+
   //   const newSchedules = schedules.map((schedule) => ({
   //     purpose: schedule.purpose,
   //     startDate: schedule.startDateTime,
@@ -92,58 +152,14 @@ const CreateStudyPlan = () => {
   //     schedules: newSchedules,
   //   };
 
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:9000/api/v1/studypal/studyplan/create",
-  //       newStudyPlan
-  //     );
-  //     console.log(response.data);
+  //   addStudyPlan(newStudyPlan);
 
-  //     addStudyPlan(newStudyPlan);
-  //     navigate("/studyplan");
-
-  //     setTitle("");
-  //     setDescription("");
-  //     setSchedules([]);
-  //     console.log(newStudyPlan);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  //   setTitle("");
+  //   setDescription("");
+  //   setSchedules([]);
+  //   console.log(newStudyPlan);
+  //   navigate("/studyplan");
   // };
-
-  const handleAddStudyPlan = (e) => {
-    e.preventDefault();
-
-    if (title.trim() === "" || description.trim() === "") {
-      setCreateError(true);
-
-      setTimeout(() => {
-        setCreateError(false);
-      }, 3000);
-
-      return;
-    }
-
-    const newSchedules = schedules.map((schedule) => ({
-      purpose: schedule.purpose,
-      startDate: schedule.startDateTime,
-      endDateTime: schedule.endDateTime,
-    }));
-
-    const newStudyPlan = {
-      title,
-      description,
-      schedules: newSchedules,
-    };
-
-    addStudyPlan(newStudyPlan);
-
-    setTitle("");
-    setDescription("");
-    setSchedules([]);
-    console.log(newStudyPlan);
-    navigate("/studyplan");
-  };
 
   return (
     <div className={styles.container}>
