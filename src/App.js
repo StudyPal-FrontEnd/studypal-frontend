@@ -18,51 +18,54 @@ import Profile from "./container/pages/components/ContextPractice/Profile";
 import UserName from "./container/pages/components/ContextPractice/UserName";
 import { UsernameContext } from "./container/pages/Contexts/UserNameContext";
 import StudyPlanProvider from "./container/pages/Contexts/StudyPlanProvider";
+import UserProvider from "./container/pages/Contexts/UserProvider";
 
 function App() {
   const [showProfile, setShowProfile] = useState(false);
   const [username, setUsername] = useState("");
 
   return (
-    <StudyPlanProvider>
-      <div className="App">
-        <Router>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/otp-page" element={<OTP />} />
+    <UserProvider>
+      <StudyPlanProvider>
+        <div className="App">
+          <Router>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/otp-page" element={<OTP />} />
 
-            <Route path="dashboard" element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
 
-            {/* Study Plan context routes */}
-            <Route path="/studyplan">
-              <Route path="" element={<StudyPlansPage />} />
-              <Route path="create" element={<CreateStudyPlan />} />
-              <Route path="update" element={<UpdateStudyPlan />} />
-            </Route>
+              {/* Study Plan context routes */}
+              <Route path="/studyplan">
+                <Route path="" element={<StudyPlansPage />} />
+                <Route path="create" element={<CreateStudyPlan />} />
+                <Route path="update" element={<UpdateStudyPlan />} />
+              </Route>
 
-            <Route path="notes" element={<NotesPage />} />
-            <Route path="resourcematerials" element={<ResourceMaterials />} />
+              <Route path="notes" element={<NotesPage />} />
+              <Route path="resourcematerials" element={<ResourceMaterials />} />
 
-            <Route path="createnotes" element={<CreateNote />} />
-            <Route path="searchresources" element={<SearchResources />} />
-            <Route path="template" element={<DashboardTemplate />} />
-            {/* Context Practical */}
-            <Route
-              path="context"
-              element={
-                <UsernameContext.Provider
-                  value={{ username, setUsername, setShowProfile }}
-                >
-                  {showProfile ? <Profile /> : <UserName />}
-                </UsernameContext.Provider>
-              }
-            />
-          </Routes>
-        </Router>
-      </div>
-    </StudyPlanProvider>
+              <Route path="createnotes" element={<CreateNote />} />
+              <Route path="searchresources" element={<SearchResources />} />
+              <Route path="template" element={<DashboardTemplate />} />
+              {/* Context Practical */}
+              <Route
+                path="context"
+                element={
+                  <UsernameContext.Provider
+                    value={{ username, setUsername, setShowProfile }}
+                  >
+                    {showProfile ? <Profile /> : <UserName />}
+                  </UsernameContext.Provider>
+                }
+              />
+            </Routes>
+          </Router>
+        </div>
+      </StudyPlanProvider>
+    </UserProvider>
   );
 }
 

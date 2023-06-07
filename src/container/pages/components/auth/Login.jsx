@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLessThan, faInfo } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import styles from "../../styles/AuthPages.module.css";
+import UserContext from "../../Contexts/UserContext";
 
 const Login = () => {
+  const { login } = useContext(UserContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [currentField, setCurrentField] = useState("");
@@ -65,7 +68,11 @@ const Login = () => {
       axios
         .post("http://localhost:9000/api/v1/studypal/login", data)
         .then((response) => {
+          const userData = response.data;
+          login(userData);
+
           navigate("/dashboard");
+          // const { firstName, lastName, ...data } = response;
         })
 
         .catch((error) => {
