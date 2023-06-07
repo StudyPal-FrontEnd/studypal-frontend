@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "../../styles/AuthPages.module.css";
 import style from "../../styles/otp.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -6,38 +6,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLessThan } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import PinInput from "react-pin-input";
+import UserContext from "../../Contexts/UserContext";
 
 const OTP = () => {
+  const { verifyOtp } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
   const email = location?.state?.email || "";
   const [otp, setOtp] = useState("");
-  // const [otp2, setOtp2] = useState("");
-  // const [otp3, setOtp3] = useState("");
-  // const [otp4, setOtp4] = useState("");
+
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-
-  // const handleOtpChange = (e, inputNum) => {
-  //   const value = e.target.value;
-  //   switch (inputNum) {
-  //     case 1:
-  //       setOtp1(value);
-  //       break;
-  //     case 2:
-  //       setOtp2(value);
-  //       break;
-  //     case 3:
-  //       setOtp3(value);
-  //       break;
-  //     case 4:
-  //       setOtp4(value);
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // };
 
   const handleOtpChange = (value) => {
     setOtp(value);
@@ -45,8 +24,6 @@ const OTP = () => {
 
   const handleOtpSubmit = (e) => {
     e.preventDefault();
-
-    // const verificationToken = otp1 + otp2 + otp3 + otp4;
 
     axios
       .post("http://localhost:9000/api/v1/studypal/verify", {
@@ -67,9 +44,6 @@ const OTP = () => {
       });
 
     setOtp("");
-    // setOtp2("");
-    // setOtp3("");
-    // setOtp4("");
   };
 
   const handleResendEmail = () => {
@@ -115,42 +89,6 @@ const OTP = () => {
           </div>
           <div className={style.tokenSection}>
             <form className={style.tokenForm} onSubmit={handleOtpSubmit}>
-              {/* <input
-                type="password"
-                value={otp1}
-                name="password"
-                id="password"
-                maxLength="1"
-                placeholder=""
-                onChange={(e) => handleOtpChange(e, 1)}
-              />
-              <input
-                type="password"
-                value={otp2}
-                name="password"
-                id="password"
-                maxLength="1"
-                placeholder=""
-                onChange={(e) => handleOtpChange(e, 2)}
-              />
-              <input
-                type="password"
-                value={otp3}
-                name="password"
-                id="password"
-                maxLength="1"
-                placeholder=""
-                onChange={(e) => handleOtpChange(e, 3)}
-              />
-              <input
-                type="password"
-                value={otp4}
-                name="password"
-                id="password"
-                maxLength="1"
-                placeholder=""
-                onChange={(e) => handleOtpChange(e, 4)}
-              /> */}
               <PinInput
                 length={4}
                 secret
