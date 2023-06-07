@@ -2,19 +2,14 @@ import { useContext, useState, useEffect } from "react";
 import styles from "../../styles/Dashboard.module.css";
 import { Link } from "react-router-dom";
 import ProfileImg from "../../../../assets/images/svg/profileImg.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlus,
-  faCalendarCheck,
-  faNoteSticky,
-  faStickyNote,
-} from "@fortawesome/free-solid-svg-icons";
 import { Icon } from "@iconify/react";
-
 import SideSection from "./SideSection";
 import StudyPlanContext from "../../Contexts/StudyPlanContext";
+import UserContext from "../../Contexts/UserContext";
 
-const Dashboard = ({ fullName }) => {
+const Dashboard = () => {
+  const { user } = useContext(UserContext);
+
   const [searchTerm, setSearchTerm] = useState("");
   const { studyPlans } = useContext(StudyPlanContext);
   const [recentStudyPlans, setRecentStudyPlans] = useState([]);
@@ -56,7 +51,7 @@ const Dashboard = ({ fullName }) => {
                 alt="Profile Ima"
               />
             </div>
-            <div className={styles.profileName}>{fullName}</div>
+            <div className={styles.profileName}>{user.firstName}</div>
           </div>
         </div>
         <div className={styles.homeSection}>
